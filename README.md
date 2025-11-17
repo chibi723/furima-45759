@@ -2,17 +2,14 @@
 
 |Column|Type|Options|
 |------|----|-------|
-| id | BIGINT | PRIMARY KEY, NOT NULL |
-| nickname | VARCHAR | NOT NULL |
-| email | VARCHAR | NOT NULL, UNIQUE |
-| encrypted_password | VARCHAR | NOT NULL |
-| first_name | VARCHAR | NOT NULL |
-| last_name | VARCHAR | NOT NULL |
-| first_name_kana | VARCHAR | NOT NULL |
-| last_name_kana | VARCHAR | NOT NULL |
+| nickname | string | NOT NULL |
+| email | string | NOT NULL, UNIQUE |
+| encrypted_password | string | NOT NULL |
+| first_name | string | NOT NULL |
+| last_name | string | NOT NULL |
+| first_name_kana | string | NOT NULL |
+| last_name_kana | string | NOT NULL |
 | birth_date | DATE | NOT NULL |
-| created_at | DATETIME | NOT NULL |
-| updated_at | DATETIME | NOT NULL |
 
 ### Association
 `has_many :items` (出品商品)
@@ -22,9 +19,8 @@
 
 |Column|Type|Options||
 |------|----|-------|
-| id | BIGINT | PRIMARY KEY, NOT NULL |
-| user_id | BIGINT | NOT NULL, FOREIGN KEY (users.id) |
-| name | VARCHAR | NOT NULL |
+| user_id | references | NOT NULL, FOREIGN KEY (users.id) |
+| name | string | NOT NULL |
 | info | TEXT | NOT NULL |
 | price | INTEGER | NOT NULL |
 | category_id | INTEGER | NOT NULL (ActiveHash) |
@@ -32,8 +28,6 @@
 | shipping_fee_id | INTEGER | NOT NULL (ActiveHash) |
 | prefecture_id | INTEGER | NOT NULL (ActiveHash) |
 | scheduled_delivery_id | INTEGER | NOT NULL (ActiveHash) |
-| created_at | DATETIME | NOT NULL |
-| updated_at | DATETIME | NOT NULL |
 
 ### Association
 `belongs_to :user` (出品者)
@@ -44,11 +38,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-| id | BIGINT | PRIMARY KEY, NOT NULL |
-| user_id | BIGINT | NOT NULL, FOREIGN KEY (users.id) |
-| item_id | BIGINT | NOT NULL, FOREIGN KEY (items.id), UNIQUE |
-| created_at | DATETIME | NOT NULL |
-| updated_at | DATETIME | NOT NULL |
+| user_id | references | NOT NULL, FOREIGN KEY (users.id) |
+| item_id | references | NOT NULL, FOREIGN KEY (items.id), UNIQUE |
 
 ### Association
 `belongs_to :user` (購入者)
@@ -59,16 +50,13 @@
 
 |Column|Type|Options|
 |------|----|-------|
-| id | BIGINT | PRIMARY KEY, NOT NULL |
-| order_id | BIGINT | NOT NULL, FOREIGN KEY (orders.id), UNIQUE |
-| postal_code | VARCHAR | NOT NULL |
+| order_id | references | NOT NULL, FOREIGN KEY (orders.id), UNIQUE |
+| postal_code | string | NOT NULL |
 | prefecture_id | INTEGER | NOT NULL (ActiveHash) |
-| city | VARCHAR | NOT NULL |
-| street_address | VARCHAR | NOT NULL |
-| building_name | VARCHAR | NULLABLE |
-| phone_number | VARCHAR | NOT NULL |
-| created_at | DATETIME | NOT NULL |
-| updated_at | DATETIME | NOT NULL |
+| city | string | NOT NULL |
+| street_address | string | NOT NULL |
+| building_name | string | NULLABLE |
+| phone_number | string | NOT NULL |
 
 ### Association
 `belongs_to :order` (購入取引)
