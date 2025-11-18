@@ -9,7 +9,7 @@
 | last_name | string | NOT NULL |
 | first_name_kana | string | NOT NULL |
 | last_name_kana | string | NOT NULL |
-| birth_date | DATE | NOT NULL |
+| birth_date | date | NOT NULL |
 
 ### Association
 `has_many :items` (出品商品)
@@ -19,27 +19,26 @@
 
 |Column|Type|Options||
 |------|----|-------|
-| user_id | references | NOT NULL, FOREIGN KEY (users.id) |
+| user | references | NOT NULL, FOREIGN KEY (users.id) |
 | name | string | NOT NULL |
-| info | TEXT | NOT NULL |
-| price | INTEGER | NOT NULL |
-| category_id | INTEGER | NOT NULL (ActiveHash) |
-| sales_status_id | INTEGER | NOT NULL (ActiveHash) |
-| shipping_fee_id | INTEGER | NOT NULL (ActiveHash) |
-| prefecture_id | INTEGER | NOT NULL (ActiveHash) |
-| scheduled_delivery_id | INTEGER | NOT NULL (ActiveHash) |
+| info | text | NOT NULL |
+| price | integer | NOT NULL |
+| category_id | integer | NOT NULL (ActiveHash) |
+| sales_status_id | integer | NOT NULL (ActiveHash) |
+| shipping_fee_id | integer | NOT NULL (ActiveHash) |
+| prefecture_id | integer | NOT NULL (ActiveHash) |
+| scheduled_delivery_id | integer | NOT NULL (ActiveHash) |
 
 ### Association
 `belongs_to :user` (出品者)
 `has_one :order` (購入情報)
-`belongs_to :category` (ActiveHash)
 
 ## Tabel名: `Purchase` (購入情報/取引記録)
 
 |Column|Type|Options|
 |------|----|-------|
-| user_id | references | NOT NULL, FOREIGN KEY (users.id) |
-| item_id | references | NOT NULL, FOREIGN KEY (items.id), UNIQUE |
+| user | references | NOT NULL, FOREIGN KEY (users.id) |
+| item | references | NOT NULL, FOREIGN KEY (items.id), UNIQUE |
 
 ### Association
 `belongs_to :user` (購入者)
@@ -50,9 +49,9 @@
 
 |Column|Type|Options|
 |------|----|-------|
-| order_id | references | NOT NULL, FOREIGN KEY (orders.id), UNIQUE |
+| order | references | NOT NULL, FOREIGN KEY (orders.id), UNIQUE |
 | postal_code | string | NOT NULL |
-| prefecture_id | INTEGER | NOT NULL (ActiveHash) |
+| prefecture_id | integer | NOT NULL (ActiveHash) |
 | city | string | NOT NULL |
 | street_address | string | NOT NULL |
 | building_name | string | NULLABLE |
@@ -60,4 +59,3 @@
 
 ### Association
 `belongs_to :order` (購入取引)
-`belongs_to :prefecture` (ActiveHash)
