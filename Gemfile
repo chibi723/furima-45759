@@ -74,3 +74,7 @@ end
 group :production do
   gem 'pg'
 end
+
+#gem 'orm_adapter', '~> 0.1.0'
+
+gem 'devise', '~> 4.9'
