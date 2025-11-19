@@ -38,7 +38,7 @@
 |Column|Type|Options|
 |------|----|-------|
 | user | references | NOT NULL, FOREIGN KEY (users.id) |
-| item | references | NOT NULL, FOREIGN KEY (items.id), UNIQUE |
+| item | references | NOT NULL, FOREIGN KEY (items.id) |
 
 ### Association
 `belongs_to :user` (購入者)
@@ -49,7 +49,7 @@
 
 |Column|Type|Options|
 |------|----|-------|
-| order | references | NOT NULL, FOREIGN KEY (orders.id), UNIQUE |
+| order | references | NOT NULL, FOREIGN KEY (orders.id) |
 | postal_code | string | NOT NULL |
 | prefecture_id | integer | NOT NULL (ActiveHash) |
 | city | string | NOT NULL |
