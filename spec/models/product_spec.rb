@@ -34,61 +34,61 @@ RSpec.describe Product, type: :model do
       it 'category_idが1では保存できない' do
         @product.category_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category を選択してください")
+        expect(@product.errors.full_messages).to include("カテゴリー を選択してください")
       end
 
       it 'sales_status_idが1では保存できない' do
         @product.sales_status_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Sales status を選択してください")
+        expect(@product.errors.full_messages).to include("商品の状態 を選択してください")
       end
 
       it 'shipping_fee_status_idが1では保存できない' do
         @product.shipping_fee_status_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping fee status を選択してください")
+        expect(@product.errors.full_messages).to include("配送料の負担 を選択してください")
       end
 
       it 'prefecture_idが1では保存できない' do
         @product.prefecture_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Prefecture を選択してください")
+        expect(@product.errors.full_messages).to include("発送元の地域 を選択してください")
       end
 
       it 'scheduled_delivery_idが1では保存できない' do
         @product.scheduled_delivery_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Scheduled delivery を選択してください")
+        expect(@product.errors.full_messages).to include("発送までの日数 を選択してください")
       end
 
       it 'priceが空では保存できない' do
         @product.price = ''
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price を入力してください")
+        expect(@product.errors.full_messages).to include("価格 を入力してください")
       end
 
       it 'priceが300未満では保存できない' do
         @product.price = 100
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price は300以上の値にしてください")
+        expect(@product.errors.full_messages).to include("価格 は300以上の値にしてください")
       end
 
       it 'priceが9,999,999より大きいと保存できない' do
         @product.price = 10_000_000
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price は9999999以下の値にしてください")
+        expect(@product.errors.full_messages).to include("価格 は9999999以下の値にしてください")
       end
 
       it 'priceが半角数値でないと保存できない（全角数字）' do
         @product.price = '１２３４'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price は数値で入力してください")
+        expect(@product.errors.full_messages).to include("価格 は数値で入力してください")
       end
 
       it 'priceが数値でないと保存できない（文字列など）' do
         @product.price = 'aaaa'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price は数値で入力してください")
+        expect(@product.errors.full_messages).to include("価格 は数値で入力してください")
       end
 
       it 'userが紐付いていないと保存できない' do
