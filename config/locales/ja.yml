@@ -22,19 +22,37 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
-
+      product:
+        image: 画像
+        name: 商品名
+        info: 商品の説明
+        price: 価格
+        category_id: カテゴリー
+        sales_status_id: 商品の状態
+        shipping_fee_status_id: 配送料の負担
+        prefecture_id: 発送元の地域
+        scheduled_delivery_id: 発送までの日数
     errors:
       models:
         user:
           attributes:
             email:
               taken: は既に使用されています
+        product:
+          attributes:
+            image:
+              blank: を添付してください
 
       messages:
         blank: を入力してください
         confirmation: と%{attribute}の入力が一致しません
         invalid: は不正な値です
         too_short: は%{count}文字以上で入力してください
+        other_than: を選択してください
+        not_a_number: は数値で入力してください
+        greater_than_or_equal_to: は%{count}以上の値にしてください
+        less_than_or_equal_to: は%{count}以下の値にしてください
+        required: を入力してください
 
   devise:
     errors:
@@ -50,3 +68,4 @@ ja:
 
     registrations:
       signed_up: アカウント登録が完了しました
+
