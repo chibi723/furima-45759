@@ -3,6 +3,8 @@ class ProductsController < ApplicationController
 
   def index
     # トップページの処理
+    # 出品された商品を新しい順に取得
+    @products = Product.order(created_at: :desc)
   end
 
   # 出品フォームを表示するためのアクション
