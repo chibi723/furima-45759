@@ -1,10 +1,15 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_product, only: [:show]
 
   def index
     # トップページの処理
     # 出品された商品を新しい順に取得
     @products = Product.order(created_at: :desc)
+  end
+
+  def show
+    @product = Product.find(params[:id])
   end
 
   # 出品フォームを表示するためのアクション
@@ -29,6 +34,10 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
   # 安全にデータを受け取るためのストロングパラメータ
   def product_params
