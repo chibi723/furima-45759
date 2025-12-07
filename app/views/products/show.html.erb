@@ -1,197 +1,121 @@
 <%= render "shared/header" %>
 
+<%# 商品の概要 %>
 <div class="item-show">
-
-  <!-- 商品全体のボックス -->
   <div class="item-box">
-
     <!-- 商品名 -->
-    <h2 class="name" style="text-align:center; font-size:25px; margin:0px 0px 0px;">
+    <h2 class="item-name">
       <%= @product.name %>
     </h2>
 
     <!-- 商品画像 -->
-    <div class="item-image" style="text-align:center;">
-      <%= image_tag @product.image, class: "item-box-img" %>
-      <%# 商品購入機能実装後に使う sold out 表示 %>
-      <%# if @product.order.present? %>
-      <%#   <div class="sold-out">Sold Out!!</div> %>
-      <%# end %>
+    <div class="item-img-content">
+      <%= image_tag @product.image, class: "item-img" %>
     </div>
 
-    <!-- 価格 ＋ 送料込み(出品者負担) -->
-    <div class="item-price"
-         style="text-align:center; margin:25px 0px 0px; font-size:30px; font-weight:bold;">
-      <span class="price">¥ <%= @product.price %></span><br>
+    <!-- 価格＋送料 -->
+    <div class="item-price-box">
+      <span class="item-price">¥ <%= @product.price %></span>
+      <span class="item-postage">送料込み(出品者負担)</span>
     </div>
 
-    <!-- 送料込み(出品者負担) -->
-    <div class="item-box">
-      <span class="postage" style="margin:-75px 0px 0px; font-size:16px; font-weight:normal;">
-        送料込み(出品者負担)
-      </span>
-    </div>
+    <!-- 購入 / 編集・削除ボタン -->
+    <div class="item-main-actions">
+      <% if user_signed_in? && current_user.id == @product.user_id %>
+        <!-- 自分が出品した商品（販売中） -->
+        <%= link_to "商品の編集", #edit_product_path(@product), 
+          class: "item-edit-btn" %>
 
-    <!-- ボタンエリア（HTMLのみで装飾） -->
-    <% if user_signed_in? %>
-      <% if current_user.id == @product.user_id %>
-        <!-- 自分が出品した商品：編集・削除ボタン -->
-        <div class="item-edit-destroy" style="text-align:center; margin:0px 0px; font-size:25px;">
-          <%= link_to "商品の編集",
-                      edit_product_path(@product),
-                      style: "display:block;
-                              width:430px;
-                              height:70px;
-                              margin:-80px 0px 15px;
-                              padding:15px 0;
-                              background-color:#ea352d;
-                              color:#fff;
-                              text-decoration:none;
-                              border-radius:4px;
-                              font-weight:bold;" %>
+        <div class="item-or">or</div>
 
-          <span style="display:block; margin-bottom:15px; color:#000000;">or</span>
+        <%= link_to "削除", #product_path(@product),
+          data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+          class: "item-destroy-btn" %>
 
-          <%= link_to "削除",
-                      product_path(@product),
-                      data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-                      style: "display:block;
-                              width:350px;
-                              margin:0 auto;
-                              padding:15px 0;
-                              background-color:#d3d3d3;
-                              color:#333;
-                              text-decoration:none;
-                              border-radius:4px;" %>
-        </div>
-      <% else %>
-        <!-- 他人が出品した商品：購入画面に進むボタン -->
-        <div class="item-edit-destroy" style="text-align:center; margin:0px 0px; font-size:25px;">
-          <%= link_to "購入画面に進む", "#",
-                      style: "display:block;
-                              width:450px;
-                              height:70px;
-                              margin:-80px 0px 15px;
-                              padding:15px 0;
-                              background-color:#ea352d;
-                              color:#fff;
-                              text-decoration:none;
-                              border-radius:4px;
-                              font-weight:bold;" %>
-        </div>
+      <% elsif user_signed_in? %>
+        <!-- 他人が出品した商品（販売中） -->
+        <%# 購入機能はまだなのでリンクはダミーでOK %>
+        <%= link_to "購入画面に進む", "#", class: "item-buy-btn" %>
       <% end %>
-    <% end %>
+    </div>
 
     <!-- 商品説明 -->
-    <div class="item-explain-box" style="max-width:800px; margin:60px 0px 40px;">
-      <p class="item-explain"><%= simple_format(@product.info) %></p>
+    <div class="item-explain-box">
+      <p class="item-explain"><%= @product.info %></p>
     </div>
 
     <!-- 詳細テーブル -->
-    <table class="detail-table"
-           style="width:1000px; max-width:100%; margin:0 auto; border-collapse:collapse; border:1px solid #eee;">
+    <table class="detail-table">
       <tbody>
         <tr>
-          <th style="text-align:center; font-size:14px; width:20%; padding:20px; background:#f5f5f5; border:1px solid #eee;">出品者</th>
-          <td style="font-size:14px; padding:20px; border:1px solid #eee;"><%= @product.user.nickname %></td>
+          <th class="detail-item">出品者</th>
+          <td class="detail-value"><%= @product.user.nickname %></td>
         </tr>
         <tr>
-          <th style="text-align:center; font-size:14px; padding:20px; background:#f5f5f5; border:1px solid #eee;">カテゴリー</th>
-          <td style="font-size:14px; padding:20px; border:1px solid #eee;"><%= @product.category.name %></td>
+          <th class="detail-item">カテゴリー</th>
+          <td class="detail-value"><%= @product.category.name %></td>
         </tr>
         <tr>
-          <th style="text-align:center; font-size:14px; padding:20px; background:#f5f5f5; border:1px solid #eee;">商品の状態</th>
-          <td style="font-size:14px; padding:20px; border:1px solid #eee;"><%= @product.sales_status.name %></td>
+          <th class="detail-item">商品の状態</th>
+          <td class="detail-value"><%= @product.sales_status.name %></td>
         </tr>
         <tr>
-          <th style="text-align:center; font-size:14px; padding:20px; background:#f5f5f5; border:1px solid #eee;">配送料の負担</th>
-          <td style="font-size:14px; padding:20px; border:1px solid #eee;"><%= @product.shipping_fee_status.name %></td>
+          <th class="detail-item">配送料の負担</th>
+          <td class="detail-value"><%= @product.shipping_fee_status.name %></td>
         </tr>
         <tr>
-          <th style="text-align:center; font-size:14px; padding:20px; background:#f5f5f5; border:1px solid #eee;">発送元の地域</th>
-          <td style="font-size:14px; padding:20px; border:1px solid #eee;"><%= @product.prefecture.name %></td>
+          <th class="detail-item">発送元の地域</th>
+          <td class="detail-value"><%= @product.prefecture.name %></td>
         </tr>
         <tr>
-          <th style="text-align:center; font-size:14px; padding:20px; background:#f5f5f5; border:1px solid #eee;">発送日の目安</th>
-          <td style="font-size:14px; padding:20px; border:1px solid #eee;"><%= @product.scheduled_delivery.name %></td>
+          <th class="detail-item">発送日の目安</th>
+          <td class="detail-value"><%= @product.scheduled_delivery.name %></td>
         </tr>
       </tbody>
     </table>
 
-    <!-- お気に入り／不適切な商品の通報ボタン -->
-    <div style="display:flex; justify-content:center; gap:30px; margin:40px 0 0px;">
-
-      <!-- お気に入りボタン -->
-      <%= link_to "#",
-        style: "display:flex; align-items:center; justify-content:center; width:200px; height:50px; border-radius:25px; border:2px solid #f5a623; color:#f5a623; text-decoration:none; font-weight:bold; background:#fff;" do %>
-        <span style="font-size:18px; margin-right:6px;">★</span>
-        <span>お気に入り 0</span>
+    <!-- お気に入り / 通報ボタン -->
+    <div class="item-option">
+      <%= link_to "#", class: "item-favorite-btn" do %>
+        <span class="item-favorite-icon">★</span>
+        <span class="item-favorite-text">お気に入り 0</span>
       <% end %>
 
-      <!-- 不適切な商品の通報ボタン -->
-      <%= link_to "#",
-        style: "display:flex; align-items:center; justify-content:center; width:260px; height:50px; border-radius:25px; border:2px solid #333; color:#333; text-decoration:none; font-weight:bold; background:#fff;" do %>
-        <span style="font-size:18px; margin-right:6px;">⚑</span>
-        <span>不適切な商品の通報</span>
+      <%= link_to "#", class: "item-report-btn" do %>
+        <span class="item-report-flag">⚑</span>
+        <span class="item-report-text">不適切な商品の通報</span>
       <% end %>
-    </div>
-
-  </div><!-- /.item-box -->
-
-  <!-- コメント欄 -->
-  <div style="width: 700px;background-color:#ffffff; margin: 40px auto 0;">
-    <div style="border: 1px solid #ffffff; padding: 0px;">
-      <textarea style="width: 100%; height: 140px; border: 1px solid #ccc; resize: vertical;"></textarea>
-      <p style="margin-top: 10px; font-size: 15px; color: #000000ff;">
-        相手のことを考え丁寧なコメントを心がけましょう。<br>
-        不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      </p>
-      <div style="text-align: center; margin-top: 20px;">
-        <button type="button"
-                style="display:inline-block;
-                       padding:14px 80px;
-                       background-color:#3ccace;
-                       color:#fff;
-                       border:none;
-                       border-radius:30px;
-                       font-size:20px;
-                       cursor:pointer;">
-          💬 コメントする
-        </button>
-      </div>
     </div>
   </div>
+</div>
+<%# /商品の概要 %>
 
-  <!-- ここから ナビゲーションリンク -->
+<%# コメント欄（見た目だけ） %>
+<div class="comment-box">
+  <form>
+    <textarea class="comment-text"></textarea>
+    <p class="comment-warn">
+      相手のことを考え丁寧なコメントを心がけましょう。<br>
+      不快な言葉遣いなどは利用制限や退会処分となることがあります。
+    </p>
+    <button type="submit" class="comment-btn">
+      <span class="comment-icon">💬</span>
+      <span>コメントする</span>
+    </button>
+  </form>
+</div>
 
-  <div style="width: 100%; margin-top: 40px; overflow: hidden;">
-
-    <!-- 前の商品（左寄せ・少し内側） -->
-    <div style="float: left; margin-left: 400px; font-size:30px;">
-      <% if @product.previous.present? %>
-        <%= link_to "＜ 前の商品", product_path(@product.previous),
-                  style: "text-decoration: none; color: #00bcd4;" %>
-      <% end %>
-    </div>
-
-    <!-- 後ろの商品（右寄せ・少し内側） -->
-    <div style="float: right; margin-right: 400px; font-size:30px;">
-      <% if @product.next.present? %>
-        <%= link_to "後ろの商品 ＞", product_path(@product.next),
-                  style: "text-decoration: none; color: #00bcd4;" %>
-      <% end %>
-    </div>
-
-    <!-- カテゴリー（レディースなど）をもっと見る：中央寄せ＋少し下にずらす -->
-    <div style="text-align: center; margin-top: 40px; margin-right: 600px; font-size:20px; font-weight: bold;">
-      <%= link_to "#{@product.category.name}をもっと見る", "#",
-                style: "text-decoration: none; color: #00bcd4;" %>
-    </div>
-
-    
+<%# 前の商品 / 後ろの商品 / レディースをもっと見る %>
+<div class="item-links">
+  <div class="item-link-prev">
+    <a href="#" class="change-item-btn">＜ 前の商品</a>
   </div>
-  <!-- ここまで ナビゲーションリンク -->
-
+  <div class="item-link-more">
+    <a href="#" class="change-item-btn">レディースをもっと見る</a>
+  </div>
+  <div class="item-link-next">
+    <a href="#" class="change-item-btn">後ろの商品 ＞</a>
+  </div>
 </div>
 
 <%= render "shared/footer" %>

@@ -87,11 +87,11 @@
           <li class='list'>
             <%= link_to product_path(product) do %>
               <div class='item-img-content'>
-                <%= image_tag product.image, class: "item-img" %>
+                <%= image_tag product.image, class: "pick-up-item-img" %>
               </div>
-              <div class='item-info'>
-                <h3 class='item-name'><%= product.name %></h3>
-                <div class='item-price'>
+              <div class='pick-up-item-info'>
+                <h3 class='pick-up-item-name'><%= product.name %></h3>
+                <div class='pick-up-item-price'>
                   <span>
                     <%= product.price %>円<br>
                     <%= product.shipping_fee_status.name %>
