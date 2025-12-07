@@ -21,21 +21,20 @@
 
     <!-- 購入 / 編集・削除ボタン -->
     <div class="item-main-actions">
-      <% if user_signed_in? && current_user.id == @product.user_id %>
-        <!-- 自分が出品した商品（販売中） -->
-        <%= link_to "商品の編集", #edit_product_path(@product), 
-          class: "item-edit-btn" %>
+      <% if user_signed_in? %>
+        <% if current_user.id == @product.user_id %>
+          <!-- 自分が出品した商品（販売中） -->
+          <%= link_to "商品の編集", #edit_product_path(@product), 
+            class: "item-edit-btn" %>
+          <div class="item-or">or</div>
+          <%= link_to "削除", #product_path(@product),
+            data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+            class: "item-destroy-btn" %>
 
-        <div class="item-or">or</div>
-
-        <%= link_to "削除", #product_path(@product),
-          data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-          class: "item-destroy-btn" %>
-
-      <% elsif user_signed_in? %>
-        <!-- 他人が出品した商品（販売中） -->
-        <%# 購入機能はまだなのでリンクはダミーでOK %>
-        <%= link_to "購入画面に進む", "#", class: "item-buy-btn" %>
+        <% else %>
+          <!-- 他人が出品した商品（販売中） -->
+          <%= link_to "購入画面に進む", "#", class: "item-buy-btn" %>
+        <% end %>
       <% end %>
     </div>
 
@@ -105,13 +104,15 @@
   </form>
 </div>
 
-<%# 前の商品 / 後ろの商品 / レディースをもっと見る %>
+<%# 前の商品 / 後ろの商品 / カテゴリをもっと見る %>
 <div class="item-links">
   <div class="item-link-prev">
     <a href="#" class="change-item-btn">＜ 前の商品</a>
   </div>
   <div class="item-link-more">
-    <a href="#" class="change-item-btn">レディースをもっと見る</a>
+    <a href="#" class="change-item-btn">
+      <%= @product.category.name %>をもっと見る
+    </a>
   </div>
   <div class="item-link-next">
     <a href="#" class="change-item-btn">後ろの商品 ＞</a>
