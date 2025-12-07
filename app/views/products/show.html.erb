@@ -16,7 +16,7 @@
     <!-- 価格＋送料 -->
     <div class="item-price-box">
       <span class="item-price">¥ <%= @product.price %></span>
-      <span class="item-postage">送料込み(出品者負担)</span>
+      <span class="item-shipping-fee"><%= @product.shipping_fee_status.name %></span>
     </div>
 
     <!-- 購入 / 編集・削除ボタン -->
