@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   root to: 'products#index'   # トップページ（一覧）
 
-  resources :products, only: [:index, :new, :create]
+  resources :products, only: [:index, :new, :create, :show, :edit, :update, :destroy]
 end

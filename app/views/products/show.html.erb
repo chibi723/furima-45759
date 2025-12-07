@@ -1,0 +1,122 @@
+<%= render "shared/header" %>
+
+<%# 商品の概要 %>
+<div class="item-show">
+  <div class="item-box">
+    <!-- 商品名 -->
+    <h2 class="item-name">
+      <%= @product.name %>
+    </h2>
+
+    <!-- 商品画像 -->
+    <div class="item-img-content">
+      <%= image_tag @product.image, class: "item-img" %>
+    </div>
+
+    <!-- 価格＋送料 -->
+    <div class="item-price-box">
+      <span class="item-price">¥ <%= @product.price %></span>
+      <span class="item-shipping-fee"><%= @product.shipping_fee_status.name %></span>
+    </div>
+
+    <!-- 購入 / 編集・削除ボタン -->
+    <div class="item-main-actions">
+      <% if user_signed_in? %>
+        <% if current_user.id == @product.user_id %>
+          <!-- 自分が出品した商品（販売中） -->
+          <%= link_to "商品の編集", #edit_product_path(@product), 
+            class: "item-edit-btn" %>
+          <div class="item-or">or</div>
+          <%= link_to "削除", #product_path(@product),
+            data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+            class: "item-destroy-btn" %>
+
+        <% else %>
+          <!-- 他人が出品した商品（販売中） -->
+          <%= link_to "購入画面に進む", "#", class: "item-buy-btn" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- 商品説明 -->
+    <div class="item-explain-box">
+      <p class="item-explain"><%= @product.info %></p>
+    </div>
+
+    <!-- 詳細テーブル -->
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-item">出品者</th>
+          <td class="detail-value"><%= @product.user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">カテゴリー</th>
+          <td class="detail-value"><%= @product.category.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">商品の状態</th>
+          <td class="detail-value"><%= @product.sales_status.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">配送料の負担</th>
+          <td class="detail-value"><%= @product.shipping_fee_status.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">発送元の地域</th>
+          <td class="detail-value"><%= @product.prefecture.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-item">発送日の目安</th>
+          <td class="detail-value"><%= @product.scheduled_delivery.name %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- お気に入り / 通報ボタン -->
+    <div class="item-option">
+      <%= link_to "#", class: "item-favorite-btn" do %>
+        <span class="item-favorite-icon">★</span>
+        <span class="item-favorite-text">お気に入り 0</span>
+      <% end %>
+
+      <%= link_to "#", class: "item-report-btn" do %>
+        <span class="item-report-flag">⚑</span>
+        <span class="item-report-text">不適切な商品の通報</span>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%# /商品の概要 %>
+
+<%# コメント欄（見た目だけ） %>
+<div class="comment-box">
+  <form>
+    <textarea class="comment-text"></textarea>
+    <p class="comment-warn">
+      相手のことを考え丁寧なコメントを心がけましょう。<br>
+      不快な言葉遣いなどは利用制限や退会処分となることがあります。
+    </p>
+    <button type="submit" class="comment-btn">
+      <span class="comment-icon">💬</span>
+      <span>コメントする</span>
+    </button>
+  </form>
+</div>
+
+<%# 前の商品 / 後ろの商品 / カテゴリをもっと見る %>
+<div class="item-links">
+  <div class="item-link-prev">
+    <a href="#" class="change-item-btn">＜ 前の商品</a>
+  </div>
+  <div class="item-link-more">
+    <a href="#" class="change-item-btn">
+      <%= @product.category.name %>をもっと見る
+    </a>
+  </div>
+  <div class="item-link-next">
+    <a href="#" class="change-item-btn">後ろの商品 ＞</a>
+  </div>
+</div>
+
+<%= render "shared/footer" %>
