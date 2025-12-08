@@ -24,10 +24,10 @@
       <% if user_signed_in? %>
         <% if current_user.id == @product.user_id %>
           <!-- 自分が出品した商品（販売中） -->
-          <%= link_to "商品の編集", #edit_product_path(@product), 
+          <%= link_to "商品の編集", edit_product_path(@product), 
             class: "item-edit-btn" %>
           <div class="item-or">or</div>
-          <%= link_to "削除", #product_path(@product),
+          <%= link_to "削除", product_path(@product),
             data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
             class: "item-destroy-btn" %>
 
