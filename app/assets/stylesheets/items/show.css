@@ -202,7 +202,9 @@
 }
 
 .comment-icon {
-  margin-right: 8px;
+  margin-right: 20px;
+  align-items: center;
+  margin: 0 auto;
 }
 
 /* 前の商品 / 後ろの商品 / カテゴリをもっと見る */
