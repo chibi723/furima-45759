@@ -55,11 +55,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  # 自分が出品した商品以外は編集させない
-  def move_to_index
-    redirect_to root_path unless current_user.id == @product.user_id
-  end
-
   # 安全にデータを受け取るためのストロングパラメータ
   def product_params
     # permit: フォームで入力されたすべての属性とActiveHashのIDを許可
