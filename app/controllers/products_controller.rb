@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_product, only: [:show, :edit, :update]
-  before_action :move_to_index, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
 
   def index
     # トップページの処理
@@ -49,6 +49,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    # before_action で @product は取得済み
+    @product.destroy
+    redirect_to root_path # 削除完了後、トップページへ遷移
+  end
+
   private
 
   def set_product
@@ -76,8 +82,9 @@ class ProductsController < ApplicationController
   def move_to_index
     # 自分が出品した商品以外ならトップページへ
     redirect_to root_path if current_user.id != @product.user_id
+  end
 
     # ▼ 購入機能実装後に追加する
     # redirect_to root_path if @product.order.present?
-  end
+
 end
