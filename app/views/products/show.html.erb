@@ -24,7 +24,7 @@
       <% if user_signed_in? %>
         <% if current_user.id == @product.user_id %>
           <!-- 自分が出品した商品（販売中） -->
-          <%= link_to "商品の編集", #edit_product_path(@product), 
+          <%= link_to "商品の編集", edit_product_path(@product), 
             class: "item-edit-btn" %>
           <div class="item-or">or</div>
           <%= link_to "削除", #product_path(@product),
@@ -109,11 +109,13 @@
   <div class="item-link-prev">
     <a href="#" class="change-item-btn">＜ 前の商品</a>
   </div>
+
   <div class="item-link-more">
     <a href="#" class="change-item-btn">
       <%= @product.category.name %>をもっと見る
     </a>
   </div>
+  
   <div class="item-link-next">
     <a href="#" class="change-item-btn">後ろの商品 ＞</a>
   </div>

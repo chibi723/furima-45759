@@ -4,15 +4,12 @@
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), root_path %>
   </header>
 
-    <%= form_with model: @product, local: true do |f| %>
+      <div class="items-sell-main">
+        <h2 class="items-sell-title">商品の情報を入力</h2>
 
-      <div class="items-sell-contents">
-        <div class="items-sell-main">
-          <h2 class="items-sell-title">商品の情報を入力</h2>
-
-          <%= render "form" %>
-        </div>
+         <%= render "form" %>
       </div>
+
 
       <footer class="items-sell-footer">
         <ul class="menu">
@@ -26,7 +23,5 @@
         <p class="inc">
           ©Furima,Inc.
         </p>
-     </footer>
-    <% end %>
-  </div>
+      </footer>
 </div>

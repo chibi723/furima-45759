@@ -1,5 +1,3 @@
-/* 下部広告部分 */
-/* items/index.htmlの広告cssを所々使いまわしています。 */
 
 .ad-footer-contents {
   width: 100vw;
@@ -26,43 +24,23 @@
   line-height: 30px;
 }
 
-/* //下部広告部分 */
-
-.footer {
-  width: 100vw;
-  padding: 5vh 0;
-  color: #FFF;
-  background-color: #272727;
-  text-align: center;
-}
-
-.footer-contents {
+.items-sell-footer {
+  width: 60vw;
+  padding: 3ch 0;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.items-sell-footer>.menu {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 5vh;
+  margin: 3vh 0;
 }
 
-.furima-details {
-  margin: 0 4vw;
-}
-
-.footer-content-head {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.footer-link {
-  color: #FFF;
+.menu>li>a {
+  color: #000;
   font-size: 12px;
-  line-height: 30px;
-}
-
-.logo-white {
-  width: 20vh;
-  vertical-align: bottom;
-}
-
-.footer>p {
-  font-size: 14px;
+  margin: 0 30px;
 }
