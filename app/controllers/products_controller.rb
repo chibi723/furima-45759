@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :redirect_if_sold_out, only: [:edit, :update]
 
   def index
     # トップページの処理
@@ -84,7 +85,11 @@ class ProductsController < ApplicationController
     redirect_to root_path if current_user.id != @product.user_id
   end
 
-    # ▼ 購入機能実装後に追加する
-    # redirect_to root_path if @product.order.present?
+  # 購入済みであればトップページへリダイレクトする
+  def redirect_if_sold_out
+    if @product.sold_out?
+      redirect_to root_path, alert: "その商品は購入済みのため、編集できません。"
+    end
+  end
 
 end

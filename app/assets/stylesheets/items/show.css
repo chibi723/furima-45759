@@ -42,17 +42,31 @@
   margin-bottom: 2px;
 }
 
-.item-img-content {
+.show-item-img {
   text-align: center;
-  margin-bottom: 30px;
+  height: auto;
 }
 
-.item-img {
-  max-width: 800px;
-  width: 500%;
-  height: auto;
+.show-item-img-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto 30px;
   background-color: #d3d3d3;
-  padding: 8px 150px 8px ;
+}
+
+.show-sold-out {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  background-color: crimson;
+  transform: skewY(-10deg);
+}
+
+.show-sold-out>span {
+  color: #FFF;
+  font-size: 45px;
+  font: bold;
 }
 
 .item-price-box {
@@ -101,6 +115,18 @@
   font-size: 20px;
 }
 
+.item-buy-btn {
+  display: inline-block;
+  padding: 15px 150px;
+  background-color: #ff0000;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 0px;
+  font-weight: bold;
+  font-size: 25px;
+  margin: 15px;
+}
+
 /* 商品説明 */
 .item-explain-box {
   margin: 30px;
@@ -112,9 +138,9 @@
 
 /* 詳細テーブル */
 .detail-table {
-  width: 77%;
+  width: 70%;
   border-collapse: collapse;
-  margin-left: 185px;
+  margin-left: 180px;
   margin-block: 30px;
 }
 

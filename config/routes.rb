@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+  root "products#index"
 
-  root to: 'products#index'   # トップページ（一覧）
-
-  resources :products, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  resources :products do
+    resources :orders, only: [:index, :create]
+  end
 end

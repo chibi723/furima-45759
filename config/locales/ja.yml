@@ -69,3 +69,27 @@ ja:
     registrations:
       signed_up: アカウント登録が完了しました
 
+  activemodel:
+    
+    errors:
+      models:
+        order_address:
+          attributes:
+            token:
+              blank: "Token can't be blank"
+            postal_code:
+              blank: "Postal code can't be blank"
+              invalid: "Postal code is invalid. Enter it as follows (e.g. 123-4567)"
+            prefecture_id:
+              blank: "Prefecture can't be blank"
+            city:
+              blank: "City can't be blank"
+            addresses:
+              blank: "Addresses can't be blank"
+            phone_number:
+              blank: "Phone number can't be blank"
+              too_short: "Phone number is too short"
+              invalid: "Phone number is invalid. Input only number"
+            prefecture_id:
+              other_than: "Prefecture can't be blank"
+

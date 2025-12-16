@@ -1,46 +1,78 @@
-
-.ad-footer-contents {
-  width: 100vw;
+body .ad-footer-contents {
+  width: 100%;
   background-image: url('furima-footer.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: top center;
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5vh 15vw;
+  padding: 60px 0;
   color: #fff;
+  text-align: center;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
 }
 
-.ad-footer-title {
-  font-size: 4vh;
-  margin-bottom: 2vh;
+body .ad-footer-title {
+  font-size: 28px;
+  margin-bottom: 16px;
 }
 
-.ad-footer-explain {
-  font-size: 3vh;
-  line-height: 30px;
+body .ad-footer-explain {
+  font-size: 18px;
+  margin-bottom: 12px;
 }
 
-.items-sell-footer {
-  width: 60vw;
-  padding: 3ch 0;
+body .footer {
+  background-color: #272727;
+  color: #fff;
+  padding: 40px 0;
+  width: 100%;
+}
+
+body .footer-contents {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.items-sell-footer>.menu {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  margin: 3vh 0;
+  gap: 60px;
+  max-width: 1000px;
+  margin: 0 auto 30px;
 }
 
-.menu>li>a {
-  color: #000;
-  font-size: 12px;
-  margin: 0 30px;
+body .furima-details {
+  min-width: 200px;
+  text-align: center;
 }
+
+body .footer-content-head {
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+body .footer-link {
+  display: block;
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 8px;
+  text-decoration: none;
+  text-align: center;
+}
+
+body .footer-link:hover {
+  text-decoration: underline;
+}
+
+body .footer .logo-white {
+  width: 120px;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+body .footer p {
+  text-align: center;
+  font-size: 12px;
+  margin: 0;
+}
+
