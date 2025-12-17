@@ -9,8 +9,14 @@
     </h2>
 
     <!-- 商品画像 -->
-    <div class="item-img-content">
-      <%= image_tag @product.image, class: "item-img" %>
+    <div class="show-item-img-wrapper">
+      <%= image_tag @product.image, class: "show-item-img" %>
+
+      <% if @product.sold_out? %>
+        <div class="show-sold-out">
+          <span>Sold Out!!</span>
+        </div>
+      <% end %>
     </div>
 
     <!-- 価格＋送料 -->
@@ -22,18 +28,18 @@
     <!-- 購入 / 編集・削除ボタン -->
     <div class="item-main-actions">
       <% if user_signed_in? %>
-        <% if current_user.id == @product.user_id %>
-          <!-- 自分が出品した商品（販売中） -->
-          <%= link_to "商品の編集", edit_product_path(@product), 
-            class: "item-edit-btn" %>
+        <% if current_user.id == @product.user_id && !@product.sold_out? %>
+          <%= link_to "商品の編集", edit_product_path(@product), class: "item-edit-btn" %>
           <div class="item-or">or</div>
           <%= link_to "削除", product_path(@product),
             data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
             class: "item-destroy-btn" %>
 
-        <% else %>
-          <!-- 他人が出品した商品（販売中） -->
-          <%= link_to "購入画面に進む", "#", class: "item-buy-btn" %>
+        <% elsif !@product.sold_out? %>
+          <%= link_to "購入画面に進む",
+            product_orders_path(@product),
+            data: { turbo: false },
+            class: "item-buy-btn" %>
         <% end %>
       <% end %>
     </div>

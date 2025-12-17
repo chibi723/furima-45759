@@ -86,9 +86,17 @@
         <% @products.each do |product| %>
           <li class='list'>
             <%= link_to product_path(product) do %>
-              <div class='item-img-content'>
+
+              <div class="item-img-content">
                 <%= image_tag product.image, class: "pick-up-item-img" %>
+
+                <% if product.sold_out? %>
+                  <div class="sold-out">
+                    <span>Sold Out!!</span>
+                  </div>
+                <% end %>
               </div>
+
               <div class='pick-up-item-info'>
                 <h3 class='pick-up-item-name'><%= product.name %></h3>
                 <div class='pick-up-item-price'>
@@ -105,8 +113,8 @@
             <% end %>
           </li>
         <% end %>
-      <% else %>
       
+      <% else %>
         <%# ダミー商品表示 %>
         <li class='list'>
           <%= link_to '#' do %>

@@ -69,3 +69,37 @@ ja:
     registrations:
       signed_up: アカウント登録が完了しました
 
+  activemodel:
+    attributes:
+      order_address:
+        token: クレジットカード情報
+        postal_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        addresses: 番地
+        phone_number: 電話番号
+        user_id: ユーザー
+        product_id: 商品
+    errors:
+      models:
+        order_address:
+          attributes:
+            token:
+              blank: を入力してください
+            postal_code:
+              blank: を入力してください
+              invalid: はハイフンを含んだ半角数字で正しく入力してください
+            prefecture_id:
+              other_than: を入力してください
+            city:
+              blank: を入力してください
+            addresses:
+              blank: を入力してください
+            phone_number:
+              blank: を入力してください
+              invalid: はハイフンなしの10桁または11桁の半角数字で入力してください
+            user_id:
+              blank: を入力してください
+            product_id:
+              blank: を入力してください
+

@@ -86,3 +86,6 @@ gem 'activestorage'
 
 gem 'active_hash'
 
+# Gemfile
+gem 'payjp'
+

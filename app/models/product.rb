@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :user
+  has_one :order
 
   has_one_attached :image
 
@@ -33,6 +34,10 @@ class Product < ApplicationRecord
   # 後ろの商品（IDが大きい中で一番近いもの）
   def next
     Product.where("id > ?", id).order(id: :asc).first
+  end
+
+  def sold_out?
+    self.order.present?
   end
   
 end

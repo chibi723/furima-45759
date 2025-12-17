@@ -3,8 +3,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # アソシエーション
-  # has_many :items    # 出品した商品
-  # has_many :orders   # 購入した商品
+  has_many :items    # 出品した商品
+  has_many :orders   # 購入した商品
 
   # ------------------------------------------------------------------
   # 必須項目およびフォーマットのバリデーション
