@@ -12,8 +12,5 @@ FactoryBot.define do
       user { create(:user) }
       product { create(:product) }
     end
-
-    user_id    { user.id }
-    product_id { product.id }
   end
 end

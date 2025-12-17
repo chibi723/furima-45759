@@ -1,6 +1,5 @@
-document.addEventListener("turbo:load", () => {
+const initializePayjs = () => {
   const cardNumberElement = document.getElementById("card-number-element");
-
   // カード入力欄がないページでは何もしない
   if (!cardNumberElement) return;
 
@@ -33,10 +32,7 @@ document.addEventListener("turbo:load", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    console.log("★ フォーム送信");
-
     const result = await payjp.createToken(cardNumber);
-    console.log("PAYJP result:", result);
 
     // エラー処理
     if (result.error) {
@@ -60,4 +56,10 @@ document.addEventListener("turbo:load", () => {
 
     form.submit();
   });
-});
+};
+
+// 初回読み込み・リンク遷移時
+document.addEventListener("turbo:load", initializePayjs);
+
+// バリデーションエラーなどの再レンダリング時
+document.addEventListener("turbo:render", initializePayjs);

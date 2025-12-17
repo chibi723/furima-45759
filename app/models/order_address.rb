@@ -4,24 +4,38 @@ class OrderAddress
   attr_accessor :token, :postal_code, :prefecture_id, :city,
                 :addresses, :building, :phone_number, :user_id, :product_id
 
-  # 各種バリデーション（既にあるもの）
-  validates :token, presence: true
-  # 1. 郵便番号のバリデーション
-  # 必須入力
-  validates :postal_code, presence: true
-  # 形式: 半角数字3桁-半角数字4桁 (例: 123-4567)
-  validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/, message: "はハイフンを含んだ半角数字で正しく入力してください" }
+  # 必須項目のバリデーション
+  with_options presence: true do
+    validates :token
+    validates :postal_code
+    validates :prefecture_id
+    validates :city
+    validates :addresses
+    validates :phone_number
+    validates :user_id
+    validates :product_id
+  end
 
-  validates :prefecture_id, presence: true, numericality: { other_than: 1 }
-  validates :city, presence: true
-  validates :addresses, presence: true
-  # 2. 電話番号のバリデーション
-  # 必須入力
-  validates :phone_number, presence: true
-  # 形式: ハイフンなしの半角数字10桁または11桁 (JSのロジックに合わせ11桁までを許容)
-  validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "はハイフンなしの10桁または11桁の半角数字で入力してください" }
+  # 郵便番号
+  validates :postal_code,
+            format: {
+              with: /\A\d{3}-\d{4}\z/,
+            }
+
+  # 都道府県（1は '--'）
+  validates :prefecture_id,
+            numericality: { other_than: 1 }
+
+  # 電話番号
+  validates :phone_number,
+            format: {
+              with: /\A\d{10,11}\z/,
+            }
 
   def save
+    sanitize_input
+    return false unless valid?
+
     order = Order.create!(
       user_id: user_id,
       product_id: product_id
@@ -37,6 +51,8 @@ class OrderAddress
       order_id: order.id
     )
   end
+
+  private
 
   def sanitize_input
     # 郵便番号の整形

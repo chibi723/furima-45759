@@ -9,9 +9,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    Rails.logger.debug "=== token ==="
-    Rails.logger.debug params[:token]
-    
     @order_address = OrderAddress.new(order_address_params)
     if @order_address.valid?
       pay_item

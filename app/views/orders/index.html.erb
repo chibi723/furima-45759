@@ -27,15 +27,8 @@
       <p class='item-payment-price'>¥<%= @product.price %></p>
     </div>
 
-    <% if @order_address.errors.any? %>
-      <div class="error-messages">
-        <ul>
-          <% @order_address.errors.full_messages.each do |m| %>
-            <li style="color: red; font-weight: bold;"><%= m %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%# 共通のバリデーションエラーメッセージ表示 %>
+    <%= render 'shared/error_messages', model: @order_address %>
 
     <%= form_with model: @order_address,
                   url: product_orders_path(@product),
