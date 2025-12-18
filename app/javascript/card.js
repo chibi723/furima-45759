@@ -34,18 +34,7 @@ const initializePayjs = () => {
 
     const result = await payjp.createToken(cardNumber);
 
-    // エラー処理
-    if (result.error) {
-      alert(result.error.message);
-      return;
-    }
-
     const tokenId = result.id;
-
-    if (!tokenId) {
-      alert("決済トークンの取得に失敗しました");
-      return;
-    }
 
     // hidden input 作成
     const hidden = document.createElement("input");

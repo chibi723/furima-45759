@@ -92,39 +92,38 @@
       <% end %>
     </div>
   </div>
-</div>
-<%# /商品の概要 %>
+  <%# /商品の概要 %>
 
-<%# コメント欄（見た目だけ） %>
-<div class="comment-box">
-  <form>
-    <textarea class="comment-text"></textarea>
-    <p class="comment-warn">
-      相手のことを考え丁寧なコメントを心がけましょう。<br>
-      不快な言葉遣いなどは利用制限や退会処分となることがあります。
-    </p>
-    <button type="submit" class="comment-btn">
-      <span class="comment-icon">💬</span>
-      <span>コメントする</span>
-    </button>
-  </form>
-</div>
+  <%# コメント欄（見た目だけ） %>
+  <div class="comment-box">
+    <form>
+      <textarea class="comment-text"></textarea>
+      <p class="comment-warn">
+        相手のことを考え丁寧なコメントを心がけましょう。<br>
+        不快な言葉遣いなどは利用制限や退会処分となることがあります。
+      </p>
+      <button type="submit" class="comment-btn">
+        <span class="comment-icon">💬</span>
+        <span>コメントする</span>
+      </button>
+    </form>
+  </div>
 
-<%# 前の商品 / 後ろの商品 / カテゴリをもっと見る %>
-<div class="item-links">
-  <div class="item-link-prev">
-    <a href="#" class="change-item-btn">＜ 前の商品</a>
+  <%# 前の商品 / 後ろの商品 / カテゴリをもっと見る %>
+  <div class="item-links">
+    <div class="item-link-prev">
+      <a href="#" class="change-item-btn">＜ 前の商品</a>
+    </div>
+    
+    <div class="item-link-next">
+      <a href="#" class="change-item-btn">後ろの商品 ＞</a>
+    </div>
   </div>
 
   <div class="item-link-more">
-    <a href="#" class="change-item-btn">
+    <a href="#" class="change-item-btn-">
       <%= @product.category.name %>をもっと見る
     </a>
   </div>
-  
-  <div class="item-link-next">
-    <a href="#" class="change-item-btn">後ろの商品 ＞</a>
-  </div>
 </div>
-
 <%= render "shared/footer" %>
