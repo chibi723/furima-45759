@@ -34,7 +34,12 @@ const initializePayjs = () => {
 
     const result = await payjp.createToken(cardNumber);
 
-    const tokenId = result.id;
+    if (result.error) {
+      form.submit();
+      return;
+    }
+
+    const tokenId = result.token.id;
 
     // hidden input 作成
     const hidden = document.createElement("input");
